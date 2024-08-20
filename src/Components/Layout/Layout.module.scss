@@ -1,0 +1,15 @@
+@import "../GlobalStyles/Variables.scss";
+.wrapper {
+  display: grid;
+  grid-template-rows: 100px 1fr;
+  width: 1200px;
+  background-color: $color-grey-light-1;
+  border-radius: 8px;
+  margin-top: 50px;
+  overflow: hidden;
+  margin-bottom: 100px;
+}
+.container {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+}

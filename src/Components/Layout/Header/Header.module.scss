@@ -1,0 +1,77 @@
+@import "../../GlobalStyles/Variables.scss";
+.wrapper {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  margin-left: 40px;
+  img {
+    width: 100%;
+    height: 46px;
+    object-fit: cover;
+  }
+}
+.searchBar {
+  display: flex;
+  height: 52px;
+  border-radius: 30px;
+  width: 500px;
+  //overflow: hidden;
+  color: $color-grey-light-3;
+  background-color: white;
+}
+.searchInput {
+  flex: 1;
+  border: none;
+  border-radius: 30px;
+  padding: 2rem;
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: $color-grey-dark-1;
+  outline: none;
+}
+.searchBtn {
+  font-size: 2rem;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 1.5rem 4rem;
+  font-weight: 500;
+  background-image: $gradient;
+  transition: 0.5s;
+  span {
+    margin-left: 0.6rem;
+  }
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+}
+.headerAction {
+  display: flex;
+  margin-right: 2rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+.addBtn,
+.bookMartBtn {
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  color: $color-primary;
+  transition: 0.5s;
+  span {
+    margin-left: 1rem;
+    color: $color-grey-dark-1;
+  }
+  .icon {
+    font-size: 2rem;
+  }
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+}

@@ -1,0 +1,14 @@
+@import "../../GlobalStyles/Variables.scss";
+.wrapper {
+  background-color: white;
+
+  position: relative;
+  padding-top: 2rem;
+}
+.copyRight {
+  position: absolute;
+  bottom: 2rem;
+  font-size: 1.2rem;
+  color: $color-grey-dark-1;
+  margin: 0 0.5rem 1rem 3rem;
+}

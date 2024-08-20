@@ -1,0 +1,26 @@
+@import "../GlobalStyles/Variables.scss";
+.wrapper {
+  display: flex;
+  padding: 12px 32px;
+  align-items: center;
+}
+.foodImage {
+  margin-right: 16px;
+  img {
+    border-radius: 50%;
+    width: 58px;
+    height: 58px;
+    object-fit: cover;
+  }
+}
+.foodInfo {
+}
+.foodTitle {
+  color: $color-primary;
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+.foodPublisher {
+  color: $color-grey-dark-2;
+  font-size: 1.2rem;
+}
