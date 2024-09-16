@@ -58,6 +58,7 @@
 }
 .addBtn,
 .bookMartBtn {
+  position: relative;
   display: flex;
   align-items: center;
   padding: 2rem;
@@ -72,6 +73,22 @@
   }
   &:hover {
     cursor: pointer;
-    transform: scale(1.1);
   }
+}
+.bookMarkContainer {
+  position: absolute;
+  right: -20px;
+  top: 60px;
+  background-color: #fff;
+  width: 350px;
+  transition: 0.5s;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 10;
+  border-radius: 10px 0 0 10px;
+}
+
+.bookMartBtn:hover .bookMarkContainer {
+  visibility: visible;
+  opacity: 1;
 }

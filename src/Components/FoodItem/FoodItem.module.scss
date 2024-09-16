@@ -3,6 +3,10 @@
   display: flex;
   padding: 12px 32px;
   align-items: center;
+  &:hover {
+    cursor: pointer;
+    background-color: $color-grey-light-2;
+  }
 }
 .foodImage {
   margin-right: 16px;

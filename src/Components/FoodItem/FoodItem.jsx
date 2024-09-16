@@ -1,9 +1,9 @@
 import style from "./FoodItem.module.scss";
 import classNames from "classnames/bind";
 const cx = classNames.bind(style);
-function FoodItem({ image, title, publisher }) {
+function FoodItem({ image, title, publisher, onClick }) {
   return (
-    <div className={cx("wrapper")}>
+    <div className={cx("wrapper")} onClick={() => onClick()}>
       <div className={cx("foodImage")}>
         <img src={image} alt="food image" />
       </div>

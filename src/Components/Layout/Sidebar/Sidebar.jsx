@@ -2,25 +2,30 @@ import style from "./Sidebar.module.scss";
 import classNames from "classnames/bind";
 import FoodItem from "../../FoodItem/FoodItem";
 import ReactPaginate from "react-paginate";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 const cx = classNames.bind(style);
-function Sidebar({ foods }) {
+function Sidebar({ foods, getActiveFood }) {
   const [currentPage, setCurrentPage] = useState(1);
+
   const postPerPage = 10;
   const lastPostIndex = currentPage * postPerPage;
   const firstPostIndex = lastPostIndex - postPerPage;
   const numberOfPage = Math.ceil(foods.results / postPerPage);
   const currentItems =
     foods.foods && foods.foods.slice(firstPostIndex, lastPostIndex);
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [foods]);
   return (
     <div className={cx("wrapper")}>
       {currentItems &&
         currentItems.map((item, index) => {
           return (
             <FoodItem
+              onClick={() => getActiveFood(item)}
               key={index}
               image={item.image_url}
               title={item.title}

@@ -6,6 +6,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faBookmark } from "@fortawesome/free-regular-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState, useRef } from "react";
+import useLocalStorage from "../../../hooks/useLocalStorage";
+import Modal from "../../Modal/Modal";
+import FoodItem from "../../FoodItem/FoodItem";
 const cx = classNames.bind(style);
 
 function Header({ handleSearch }) {
@@ -13,10 +16,13 @@ function Header({ handleSearch }) {
     results: "",
     foods: [],
   });
+  const [foodChange, setFoodChange] = useState(false);
   const searchInputRef = useRef("");
-  //const [searchInput, setSearchInput] = useState("");
+  const [formAdd, setFormAdd] = useState(false);
   const [searchResult, setSearchResult] = useState("");
-
+  const { getItem } = useLocalStorage("value");
+  const listItems = getItem();
+  console.log(listItems);
   useEffect(() => {
     console.log("Call useEffect");
     const handleAPI = async () => {
@@ -31,7 +37,7 @@ function Header({ handleSearch }) {
       });
     };
     handleAPI();
-    // handleSearch(foodList);
+    setFoodChange((prev) => !prev);
   }, [searchResult]);
   function handleOnChange(event) {
     searchInputRef.current = event.target.value;
@@ -48,6 +54,9 @@ function Header({ handleSearch }) {
       setSearchResult(searchInputRef.current);
       //setSearchResult(searchInput);
     }
+  }
+  function handleOffForm() {
+    setFormAdd(false);
   }
   return (
     <div className={cx("wrapper")} onKeyDown={handleOnEnter}>
@@ -68,16 +77,38 @@ function Header({ handleSearch }) {
         </button>
       </div>
       <div className={cx("headerAction")}>
-        <div className={cx("addBtn")}>
+        <div
+          onClick={() => {
+            setFormAdd(true);
+          }}
+          className={cx("addBtn")}
+        >
           <FontAwesomeIcon className={cx("icon")} icon={faPenToSquare} />
           <span>ADD RECIPE</span>
         </div>
         <div className={cx("bookMartBtn")}>
           <FontAwesomeIcon className={cx("icon")} icon={faBookmark} />
           <span>BOOKMARKS</span>
+          <div className={cx("bookMarkContainer")}>
+            <FoodItem
+              //onClick={() => getActiveFood(item)}
+              //key={index}
+              image="http://forkify-api.herokuapp.com/images/pumpkin_rice_soup09d2.jpg"
+              title="Mon ngon moi ngay"
+              publisher="Nguyen Viet Anh"
+            />
+            <FoodItem
+              //onClick={() => getActiveFood(item)}
+              //key={index}
+              image="http://forkify-api.herokuapp.com/images/pumpkin_rice_soup09d2.jpg"
+              title="Mon ngon moi ngay"
+              publisher="Nguyen Viet Anh"
+            />
+          </div>
         </div>
       </div>
       {console.log("foodlist:" + foodList)}
+      {formAdd && <Modal display={handleOffForm} />}
     </div>
   );
 }
