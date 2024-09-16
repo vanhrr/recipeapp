@@ -18,11 +18,21 @@ import useLocalStorage from "../../../hooks/useLocalStorage";
 const cx = classNames.bind(style);
 
 let servings = 1;
+
 function Content({ activeFood }) {
   const [currentFood, setCurrentFood] = useState({});
   const [currentFoodServings, setCurrentFoodServings] = useState(1);
+  const [isBookmark, setIsBookmark] = useState(false);
+  const bookmarkList = [];
 
-  const { setItem, removeItem } = useLocalStorage("value");
+  for (let i = 0; i < localStorage.length; i++) {
+    bookmarkList.push(localStorage.key(i));
+  }
+  console.log(bookmarkList);
+  const { setItem, getItem, removeItem } = useLocalStorage(
+    currentFood.id || "value"
+  );
+
   useEffect(() => {
     const handleAPI = async () => {
       const res = await getDetailFood(`/${activeFood.id}`);
@@ -32,7 +42,14 @@ function Content({ activeFood }) {
     handleAPI();
   }, [activeFood]);
   currentFood.id ? (servings = currentFood.servings) : 1;
-  const handleBookMark = () => {};
+  const handleBookMark = () => {
+    if (bookmarkList.includes(activeFood.id)) {
+      removeItem(activeFood);
+    } else setItem(activeFood);
+    setIsBookmark((prev) => {
+      return !prev;
+    });
+  };
   return (
     <div className={cx("wrapper")}>
       <div className={cx("content")}>
@@ -71,7 +88,13 @@ function Content({ activeFood }) {
                 </div>
               </div>
               <div onClick={handleBookMark} className={cx("recipeBookMark")}>
-                <FontAwesomeIcon icon={faBookmark} />
+                <FontAwesomeIcon
+                  icon={
+                    bookmarkList.includes(activeFood.id)
+                      ? faBookmarked
+                      : faBookmark
+                  }
+                />
               </div>
             </div>
             <div className={cx("recipeIngre")}>

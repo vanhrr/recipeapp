@@ -20,11 +20,21 @@ function Header({ handleSearch }) {
   const searchInputRef = useRef("");
   const [formAdd, setFormAdd] = useState(false);
   const [searchResult, setSearchResult] = useState("");
-  const { getItem } = useLocalStorage("value");
+
+  const [isBookmark, setIsBookmark] = useState(false);
+  const bookmarkList = [];
+
+  window.addEventListener("storage", function (event) {
+    console.log(event);
+  });
+  for (let i = 0; i < localStorage.length; i++) {
+    bookmarkList.push(localStorage.key(i));
+  }
+  const { setItem, getItem, removeItem } = useLocalStorage("value");
   const listItems = getItem();
   console.log(listItems);
   useEffect(() => {
-    console.log("Call useEffect");
+    console.log("Call useEffect abc");
     const handleAPI = async () => {
       const res = await get("", {
         params: {
@@ -90,20 +100,24 @@ function Header({ handleSearch }) {
           <FontAwesomeIcon className={cx("icon")} icon={faBookmark} />
           <span>BOOKMARKS</span>
           <div className={cx("bookMarkContainer")}>
-            <FoodItem
-              //onClick={() => getActiveFood(item)}
-              //key={index}
-              image="http://forkify-api.herokuapp.com/images/pumpkin_rice_soup09d2.jpg"
-              title="Mon ngon moi ngay"
-              publisher="Nguyen Viet Anh"
-            />
-            <FoodItem
-              //onClick={() => getActiveFood(item)}
-              //key={index}
-              image="http://forkify-api.herokuapp.com/images/pumpkin_rice_soup09d2.jpg"
-              title="Mon ngon moi ngay"
-              publisher="Nguyen Viet Anh"
-            />
+            {bookmarkList.map((item, index) => {
+              return (
+                <FoodItem
+                  key={index}
+                  // onClick={() => {
+                  //   if (bookmarkList.includes(activeFood.id)) {
+                  //     removeItem(activeFood);
+                  //   } else setItem(activeFood);
+                  //   setIsBookmark((prev) => {
+                  //     return !prev;
+                  //   });
+                  // }}
+                  image={JSON.parse(localStorage.getItem(item)).image_url}
+                  title={JSON.parse(localStorage.getItem(item)).title}
+                  publisher={JSON.parse(localStorage.getItem(item)).publisher}
+                />
+              );
+            })}
           </div>
         </div>
       </div>
