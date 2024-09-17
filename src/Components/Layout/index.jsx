@@ -13,6 +13,7 @@ const cx = classNames.bind(style);
 function Layout() {
   const [foodItems, setFoodItems] = useState({});
   const [activeFood, setActiveFood] = useState({});
+  const [bookmarkUpdate, setBookmarkUpdate] = useState(false);
   function onSearch(search) {
     console.log(search);
     setFoodItems(search);
@@ -20,13 +21,19 @@ function Layout() {
   function getFood(food) {
     setActiveFood(food);
   }
+  function handleBookmarkChange(value) {
+    setBookmarkUpdate(value);
+  }
   return (
     <div className={cx("wrapper")}>
       {console.log(foodItems)}
-      <Header handleSearch={onSearch} />
+      <Header handleSearch={onSearch} getActiveFood={getFood} />
       <div className={cx("container")}>
         <Sidebar foods={foodItems} getActiveFood={getFood} />
-        <Content activeFood={activeFood} />
+        <Content
+          activeFood={activeFood}
+          handleBookmarkChange={handleBookmarkChange}
+        />
       </div>
     </div>
   );

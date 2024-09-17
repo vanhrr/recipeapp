@@ -19,7 +19,7 @@ const cx = classNames.bind(style);
 
 let servings = 1;
 
-function Content({ activeFood }) {
+function Content({ activeFood, handleBookmarkChange }) {
   const [currentFood, setCurrentFood] = useState({});
   const [currentFoodServings, setCurrentFoodServings] = useState(1);
   const [isBookmark, setIsBookmark] = useState(false);
@@ -45,7 +45,11 @@ function Content({ activeFood }) {
   const handleBookMark = () => {
     if (bookmarkList.includes(activeFood.id)) {
       removeItem(activeFood);
-    } else setItem(activeFood);
+      handleBookmarkChange(false);
+    } else {
+      setItem(activeFood);
+      handleBookmarkChange(true);
+    }
     setIsBookmark((prev) => {
       return !prev;
     });

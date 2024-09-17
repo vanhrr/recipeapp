@@ -11,7 +11,7 @@ import Modal from "../../Modal/Modal";
 import FoodItem from "../../FoodItem/FoodItem";
 const cx = classNames.bind(style);
 
-function Header({ handleSearch }) {
+function Header({ handleSearch, getActiveFood }) {
   const [foodList, setFoodList] = useState({
     results: "",
     foods: [],
@@ -21,7 +21,6 @@ function Header({ handleSearch }) {
   const [formAdd, setFormAdd] = useState(false);
   const [searchResult, setSearchResult] = useState("");
 
-  const [isBookmark, setIsBookmark] = useState(false);
   const bookmarkList = [];
 
   window.addEventListener("storage", function (event) {
@@ -49,6 +48,7 @@ function Header({ handleSearch }) {
     handleAPI();
     setFoodChange((prev) => !prev);
   }, [searchResult]);
+  window.addEventListener("storage", (event) => console.log(event));
   function handleOnChange(event) {
     searchInputRef.current = event.target.value;
     //setSearchInput(event.target.value);
@@ -104,14 +104,9 @@ function Header({ handleSearch }) {
               return (
                 <FoodItem
                   key={index}
-                  // onClick={() => {
-                  //   if (bookmarkList.includes(activeFood.id)) {
-                  //     removeItem(activeFood);
-                  //   } else setItem(activeFood);
-                  //   setIsBookmark((prev) => {
-                  //     return !prev;
-                  //   });
-                  // }}
+                  onClick={() =>
+                    getActiveFood(JSON.parse(localStorage.getItem(item)))
+                  }
                   image={JSON.parse(localStorage.getItem(item)).image_url}
                   title={JSON.parse(localStorage.getItem(item)).title}
                   publisher={JSON.parse(localStorage.getItem(item)).publisher}
