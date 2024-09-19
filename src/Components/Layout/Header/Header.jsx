@@ -72,7 +72,7 @@ function Header({ handleSearch, getActiveFood }) {
     <div className={cx("wrapper")} onKeyDown={handleOnEnter}>
       {searchResult && handleSearch(foodList)}
       <div className={cx("logo")}>
-        <img src="../../../../public/logo.png" alt="Logo" />
+        <img src="../../../public/logo.png" alt="Logo" />
       </div>
       <div className={cx("searchBar")}>
         <input
