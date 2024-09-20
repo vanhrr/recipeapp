@@ -9,6 +9,7 @@ import { useEffect, useState, useRef } from "react";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 import Modal from "../../Modal/Modal";
 import FoodItem from "../../FoodItem/FoodItem";
+
 const cx = classNames.bind(style);
 
 function Header({ handleSearch, getActiveFood }) {
@@ -71,8 +72,8 @@ function Header({ handleSearch, getActiveFood }) {
   return (
     <div className={cx("wrapper")} onKeyDown={handleOnEnter}>
       {searchResult && handleSearch(foodList)}
-      <div className={cx("logo")}>
-        <img src="../../../public/logo.png" alt="Logo" />
+      <div className={cx("logo_icon")}>
+        <img src="logo.png" alt="Logo" />
       </div>
       <div className={cx("searchBar")}>
         <input
