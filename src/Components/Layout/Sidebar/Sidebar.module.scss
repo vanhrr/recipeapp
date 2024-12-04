@@ -2,9 +2,11 @@
 .wrapper {
   background-color: white;
   padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
 }
 .footer {
-  margin-top: 50px;
+  margin-top: auto;
 }
 
 .pagination {

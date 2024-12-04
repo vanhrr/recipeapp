@@ -67,11 +67,15 @@ function Sidebar({ foods, getActiveFood }) {
           </div>
         }
 
-        <p className={cx("copyRight")}>
+        {/* <p className={cx("copyRight")}>
           © Copyright by Vanhrr. Use for learning or your portfolio. Don't use
           to teach. Don't claim as your own.
-        </p>
+        </p> */}
       </div>
+      <p className={cx("copyRight")}>
+        © Copyright by Vanhrr. Use for learning or your portfolio. Don't use to
+        teach. Don't claim as your own.
+      </p>
     </div>
   );
 }

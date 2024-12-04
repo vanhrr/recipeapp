@@ -105,9 +105,9 @@ function Content({ activeFood, handleBookmarkChange }) {
               <h3>RECIPE INGREDIENTS</h3>
               <ul className={cx("listIngre")}>
                 {currentFood.id !== null &&
-                  currentFood.ingredients.map((item) => {
+                  currentFood.ingredients.map((item, index) => {
                     return (
-                      <li>
+                      <li key={index}>
                         <FontAwesomeIcon
                           className={cx("icon")}
                           icon={faCheck}
